@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VintageStoryDocFXPlugin", "VintageStoryDocFXPlugin\VintageStoryDocFXPlugin.csproj", "{893A8998-F483-4AA0-B2E4-9DDD7CDB125A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSDocFXAddGitHubLinkPlugin", "VSDocFXAddGitHubLinkPlugin\VSDocFXAddGitHubLinkPlugin.csproj", "{6F7D8CCD-C848-4BB4-90C6-F232BAE447CB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{893A8998-F483-4AA0-B2E4-9DDD7CDB125A} = {893A8998-F483-4AA0-B2E4-9DDD7CDB125A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSDocFXJsonOnlyMagicAddon", "VSDocFXJsonOnlyMagicAddon\VSDocFXJsonOnlyMagicAddon.csproj", "{E29A5FE1-3595-4FA4-A725-7D96A467B594}"
+	ProjectSection(ProjectDependencies) = postProject
+		{893A8998-F483-4AA0-B2E4-9DDD7CDB125A} = {893A8998-F483-4AA0-B2E4-9DDD7CDB125A}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		plugins|Any CPU = plugins|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{893A8998-F483-4AA0-B2E4-9DDD7CDB125A}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{893A8998-F483-4AA0-B2E4-9DDD7CDB125A}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{893A8998-F483-4AA0-B2E4-9DDD7CDB125A}.plugins|Any CPU.ActiveCfg = plugins|Any CPU
+		{893A8998-F483-4AA0-B2E4-9DDD7CDB125A}.plugins|Any CPU.Build.0 = plugins|Any CPU
+		{893A8998-F483-4AA0-B2E4-9DDD7CDB125A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{893A8998-F483-4AA0-B2E4-9DDD7CDB125A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F7D8CCD-C848-4BB4-90C6-F232BAE447CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7D8CCD-C848-4BB4-90C6-F232BAE447CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7D8CCD-C848-4BB4-90C6-F232BAE447CB}.plugins|Any CPU.ActiveCfg = plugins|Any CPU
+		{6F7D8CCD-C848-4BB4-90C6-F232BAE447CB}.plugins|Any CPU.Build.0 = plugins|Any CPU
+		{6F7D8CCD-C848-4BB4-90C6-F232BAE447CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7D8CCD-C848-4BB4-90C6-F232BAE447CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E29A5FE1-3595-4FA4-A725-7D96A467B594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E29A5FE1-3595-4FA4-A725-7D96A467B594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E29A5FE1-3595-4FA4-A725-7D96A467B594}.plugins|Any CPU.ActiveCfg = plugins|Any CPU
+		{E29A5FE1-3595-4FA4-A725-7D96A467B594}.plugins|Any CPU.Build.0 = plugins|Any CPU
+		{E29A5FE1-3595-4FA4-A725-7D96A467B594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E29A5FE1-3595-4FA4-A725-7D96A467B594}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {368AF969-207E-422E-B49B-4D9B8FEF022E}
+	EndGlobalSection
+EndGlobal
