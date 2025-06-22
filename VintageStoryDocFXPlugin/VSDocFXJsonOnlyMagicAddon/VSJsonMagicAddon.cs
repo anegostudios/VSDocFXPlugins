@@ -14,9 +14,6 @@ namespace VSDocFXJsonOnlyMagicAddon
         {
             base.OnPageBeingProcessed(page);
 
-            //Convert Properties to Fields!
-            ConvertYamlPropertiesToFields(page);
-
             //The current class name is used quite a lot when adding properties, so I can access it here.
             string qualName = page.Items[0].Uid;
 
@@ -50,6 +47,14 @@ namespace VSDocFXJsonOnlyMagicAddon
                             propSummary = "<!--<jsonoptional>" + required + "</jsonoptional><jsondefault>" + defaultStatus + "</jsondefault>-->\n" + propSummary;
                         }
 
+                        if (att.Arguments.Count > 4)
+                        {
+                            bool isAttribute = (bool)att.Arguments[5].Value;
+                            if (isAttribute)
+                            {
+                                propSummary += "[Attribute]";
+                            }
+                        }
 
                         string typeWithNamespace = att.Arguments[2].Value as string;
                         int sepIndex = typeWithNamespace.LastIndexOf('.');
@@ -127,6 +132,9 @@ namespace VSDocFXJsonOnlyMagicAddon
                 }
             }
 
+            //Convert Properties to Fields!
+            ConvertYamlPropertiesToRelevantTypes(page);
+
         }
 
         public override string GetAddonName()
@@ -136,16 +144,29 @@ namespace VSDocFXJsonOnlyMagicAddon
 
         /// <summary>
         /// Properties (get; set;) and fields are seperated in DocFX, meaning the sorting does not work effectively when using properties.
-        /// This function will make DocFX think that all properties are fields.
+        /// This function will make DocFX think that all properties are fields, and then turn any attributes into properties, and any enum fields into methods.
+        /// These are then handled and renamed by the CSS DocFX template.
         /// </summary>
-        protected void ConvertYamlPropertiesToFields(PageViewModel page)
+        protected void ConvertYamlPropertiesToRelevantTypes(PageViewModel page)
         {
             foreach (var item in page.Items)
             {
                 if (item.Type == MemberType.Property)
                 {
                     item.Type = MemberType.Field;
-                    item.CommentId = "F" + item.CommentId.Substring(1); //Replaces "P:Comment" with "F:Comment".
+                    if (item.CommentId != null) item.CommentId = "F" + item.CommentId.Substring(1); //Replaces "P:Comment" with "F:Comment".
+                }
+                else if (page.Items[0].Type == MemberType.Enum && item.Type == MemberType.Field)
+                {
+                    item.Type = MemberType.Method;
+                    if (item.CommentId != null) item.CommentId = "M" + item.CommentId.Substring(1);
+                }
+
+                if (item.Type == MemberType.Field && item.Summary != null && item.Summary.Contains("[Attribute]"))
+                {
+                    item.Summary = item.Summary.Replace("[Attribute]", "");
+                    item.Type = MemberType.Property;
+                    if (item.CommentId != null) item.CommentId = "P" + item.CommentId.Substring(1);
                 }
             }
         }
