@@ -47,7 +47,7 @@ namespace VSDocFXJsonOnlyMagicAddon
                             propSummary = "<!--<jsonoptional>" + required + "</jsonoptional><jsondefault>" + defaultStatus + "</jsondefault>-->\n" + propSummary;
                         }
 
-                        if (att.Arguments.Count > 4)
+                        if (att.Arguments.Count > 5)
                         {
                             bool isAttribute = (bool)att.Arguments[5].Value;
                             if (isAttribute)
@@ -128,6 +128,44 @@ namespace VSDocFXJsonOnlyMagicAddon
                             });
                         }
 
+                    }
+                }
+            }
+
+            //Check page items for document attribute.
+            foreach (var item in page.Items)
+            {
+                if (item.Attributes != null)
+                {
+                    foreach (AttributeInfo att in item.Attributes)
+                    {
+                        if (att.Type == "Vintagestory.API.DocumentAsJsonAttribute")
+                        {
+                            if (att.Arguments.Count > 0)
+                            {
+                                string required = att.Arguments[0].Value as string;
+                                string defaultStatus = att.Arguments[1].Value as string;
+                                if (item.Summary == null) item.Summary = "";
+
+                                if (defaultStatus == "")
+                                {
+                                    item.Summary = "<!--<jsonoptional>" + required + "</jsonoptional>-->\n" + item.Summary;
+                                }
+                                else
+                                {
+                                    item.Summary = "<!--<jsonoptional>" + required + "</jsonoptional><jsondefault>" + defaultStatus + "</jsondefault>-->\n" + item.Summary;
+                                }
+
+                                if (att.Arguments.Count > 2)
+                                {
+                                    bool isAttribute = (bool)att.Arguments[2].Value;
+                                    if (isAttribute)
+                                    {
+                                        item.Summary += "[Attribute]";
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
